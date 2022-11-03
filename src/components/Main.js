@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { HiOutlineDocument } from "react-icons/hi";
 import { AiOutlineSearch } from "react-icons/ai";
+
 const listArr = [
   {
     icon: <HiOutlineDocument size={32} />,
@@ -9,36 +10,45 @@ const listArr = [
   },
   {
     icon: <AiOutlineSearch size={32} />,
-    path: "test",
+    path: "search",
   },
 ];
 
 function Main() {
+  const [selected, setSelected] = useState(0);
   return (
-    <Wrap>
+    <Warp>
       <LeftBar>
-        {listArr.map((one) => (
-          <div>{one.icon}</div>
+        {listArr.map((one, index) => (
+          <IconWarp
+            selected={selected === index}
+            onClick={() => setSelected(index)}
+          >
+            {one.icon}
+          </IconWarp>
         ))}
       </LeftBar>
-    </Wrap>
+    </Warp>
   );
 }
 
 export default Main;
 
-const Wrap = styled.div`
+const Warp = styled.div`
   height: 100vh;
   background-color: aqua;
 `;
 const LeftBar = styled.div`
-  width: 50px;
   height: 100%;
-  background-color: #2cfdfd;
+  width: 50px;
+  background-color: #333333;
 `;
-const IconWrap = styled.div`
+const IconWarp = styled.div`
   display: flex;
   justify-content: center;
   padding: 10px 0;
   cursor: pointer;
+  svg {
+    color: ${({ selected }) => (selected ? "white" : "a7a7a7")};
+  }
 `;
