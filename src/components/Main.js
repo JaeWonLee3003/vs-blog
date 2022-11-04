@@ -7,7 +7,7 @@ import Accordion from "./Accordion";
 const listArr = [
   {
     icon: <HiOutlineDocument size={32} />,
-    path: "post",
+    path: "explorer",
   },
   {
     icon: <AiOutlineSearch size={32} />,
@@ -31,10 +31,13 @@ function Main() {
           </IconWarp>
         ))}
       </LeftBar>
-      <LeftContent>
-        <p>{listArr[selected].path}</p>
-        <Accordion></Accordion>
-      </LeftContent>
+
+      {selected !== null && listArr[selected] && (
+        <LeftContent>
+          <p>{listArr[selected]?.path}</p>
+          <Accordion title="Open Posts">내용</Accordion>
+        </LeftContent>
+      )}
     </Warp>
   );
 }
