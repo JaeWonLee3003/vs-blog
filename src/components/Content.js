@@ -2,16 +2,17 @@ import { useContext } from "react";
 import Appcontext from "../context/Appcontext";
 import Accordion from "./Accordion";
 function Content({ type, title, children }) {
-  const { setSelectedPost } = useContext(Appcontext);
+  const { setSelectedPost, setOpenPost, openPost } = useContext(Appcontext);
 
   function selectedFunction() {
     setSelectedPost(title);
+    setOpenPost([...openPost, title]);
   }
 
   return type === "directory" ? (
     <Accordion title={`📂${title}`}>
-      {children?.map((one) => (
-        <Content {...one} />
+      {children?.map((one, index) => (
+        <Content {...one} key={index} />
       ))}
     </Accordion>
   ) : (
