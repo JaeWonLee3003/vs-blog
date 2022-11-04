@@ -8,10 +8,28 @@ const listArr = [
   {
     icon: <HiOutlineDocument size={32} />,
     path: "explorer",
+    content: (
+      <>
+        <Accordion title="OPEN POSTS" isBold={true}>
+          <Accordion title="📂VSCODE" isBold={true}>
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdadsads
+          </Accordion>
+        </Accordion>
+        <Accordion title="VSCODE">
+          <Accordion title="📂VSCODE">
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdadsads
+          </Accordion>
+          <Accordion title="📂VSCODE">
+            &nbsp;&nbsp;&nbsp;&nbsp;📝asdasd
+          </Accordion>
+        </Accordion>
+      </>
+    ),
   },
   {
     icon: <AiOutlineSearch size={32} />,
     path: "search",
+    content: <p>111</p>,
   },
 ];
 
@@ -34,8 +52,8 @@ function Main() {
 
       {selected !== null && listArr[selected] && (
         <LeftContent>
-          <p>{listArr[selected]?.path}</p>
-          <Accordion title="Open Posts">내용</Accordion>
+          <p>{listArr[selected].path}</p>
+          {listArr[selected].content}
         </LeftContent>
       )}
     </Warp>
@@ -47,7 +65,7 @@ export default Main;
 const Warp = styled.div`
   display: flex;
   height: 100vh;
-  background-color: aqua;
+  background-color: rgb(0, 0, 0);
 `;
 const LeftBar = styled.div`
   height: 100%;
@@ -69,6 +87,7 @@ const LeftContent = styled.div`
   width: 320px;
   height: 100%;
   background-color: #252526;
+  padding: 10px;
 
   > p {
     color: #7a7a7a;
