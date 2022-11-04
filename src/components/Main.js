@@ -28,6 +28,9 @@ function Main() {
           </IconWarp>
         ))}
       </LeftBar>
+      <LeftContent>
+        <p>{listArr[selected].path}</p>
+      </LeftContent>
     </Warp>
   );
 }
@@ -35,6 +38,7 @@ function Main() {
 export default Main;
 
 const Warp = styled.div`
+  display: flex;
   height: 100vh;
   background-color: aqua;
 `;
@@ -50,5 +54,14 @@ const IconWarp = styled.div`
   cursor: pointer;
   svg {
     color: ${({ selected }) => (selected ? "white" : "a7a7a7")};
+  }
+`;
+const LeftContent = styled.div`
+  width: 320px;
+  height: 100%;
+  background-color: #252526;
+
+  > p {
+    color: #7a7a7a;
   }
 `;
