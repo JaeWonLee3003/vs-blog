@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { HiOutlineDocument } from "react-icons/hi";
 import { AiOutlineSearch } from "react-icons/ai";
+import Accordion from "./Accordion";
 
 const listArr = [
   {
@@ -22,7 +23,9 @@ function Main() {
         {listArr.map((one, index) => (
           <IconWarp
             selected={selected === index}
-            onClick={() => setSelected(index)}
+            onClick={() => {
+              setSelected(selected === index ? null : index);
+            }}
           >
             {one.icon}
           </IconWarp>
@@ -30,6 +33,7 @@ function Main() {
       </LeftBar>
       <LeftContent>
         <p>{listArr[selected].path}</p>
+        <Accordion></Accordion>
       </LeftContent>
     </Warp>
   );
@@ -52,6 +56,8 @@ const IconWarp = styled.div`
   justify-content: center;
   padding: 10px 0;
   cursor: pointer;
+
+  border-left: ${({ selected }) => (selected ? 2 : 0)}px solid;
   svg {
     color: ${({ selected }) => (selected ? "white" : "a7a7a7")};
   }
