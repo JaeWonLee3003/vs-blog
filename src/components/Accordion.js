@@ -26,12 +26,12 @@ const AccordionWrap = styled.div`
   align-items: center;
   color: white;
   font-size: 0.8rem;
-  padding: 5px 0px;
+  padding: 4px 0px;
 
   cursor: pointer;
 
   > span {
-    padding-left: 5px;
+    padding-left: 2px;
   }
 `;
 
