@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { HiOutlineDocument } from "react-icons/hi";
 import { AiOutlineSearch } from "react-icons/ai";
-import Accordion from "./Accordion";
+import Accordion from "../components/Accordion";
+import Content from "../components/Content";
+import Appcontext from "../context/Appcontext";
 
 const tempData = [
   {
@@ -41,6 +43,7 @@ const tempData = [
 
 function Main() {
   const [selected, setSelected] = useState(null);
+  const { selectedPost } = useContext(Appcontext);
 
   const listArr = [
     {
@@ -87,19 +90,8 @@ function Main() {
           {listArr[selected].content}
         </LeftContent>
       )}
+      <RightContent>{selectedPost}</RightContent>
     </Wrap>
-  );
-}
-
-function Content({ type, title, children }) {
-  return type === "directory" ? (
-    <Accordion title={`📂${title}`}>
-      {children?.map((one) => (
-        <Content {...one} />
-      ))}
-    </Accordion>
-  ) : (
-    <div>&nbsp;&nbsp;&nbsp;&nbsp;📝{title}</div>
   );
 }
 
@@ -121,13 +113,13 @@ const IconWrap = styled.div`
 const Wrap = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #1fb1b1;
 `;
 
 const LeftBar = styled.div`
   width: 50px;
   height: 100%;
   background-color: #333333;
+  min-width: 50px;
 `;
 
 const LeftContent = styled.div`
@@ -140,4 +132,8 @@ const LeftContent = styled.div`
     padding-bottom: 10px;
     color: #7a7a7a;
   }
+`;
+const RightContent = styled.div`
+  background-color: #1e1e1e;
+  width: 100%;
 `;
