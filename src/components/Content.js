@@ -5,11 +5,11 @@ function Content({ type, title, children, path }) {
   const { setSelectedPost, setOpenPost, openPost } = useContext(Appcontext);
 
   function selectedFunction() {
-    setSelectedPost(title);
+    setSelectedPost(path);
 
-    if (!openPost.includes(path));
-
-    setOpenPost([...openPost, title]);
+    if (!openPost.includes(path)) {
+      setOpenPost([...openPost, path]);
+    }
   }
 
   return type === "directory" ? (
