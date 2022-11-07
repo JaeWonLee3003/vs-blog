@@ -76,7 +76,7 @@ function Main() {
         <div></div>
 
         <RightHeader>
-          {openPost.map((one) => {
+          {openPost.map((one, index) => {
             const pathArr = one.split("/").filter(Boolean);
 
             const data = pathArr.reduce((sum, current, index) => {
@@ -97,6 +97,7 @@ function Main() {
                 onClick={() => {
                   setSelectedPost(data.path);
                 }}
+                key={index}
               >
                 📝{data.title}
                 <span
