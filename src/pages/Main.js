@@ -56,8 +56,12 @@ function Main() {
           {listArr[selected].content}
         </LeftContent>
       )}
-      <RightContent>
-        {JSON.stringify(openPost)}
+      <RightContent selected={selected}>
+        <div>
+          {openPost.map((one) => {
+            <div> {one} </div>;
+          })}
+        </div>
         {selectedPost}
       </RightContent>
     </Wrap>
@@ -101,8 +105,16 @@ const LeftContent = styled.div`
     padding-bottom: 10px;
     color: #7a7a7a;
   }
+
+  @media (max-width: 540px) {
+    width: 100%;
+  }
 `;
 const RightContent = styled.div`
   background-color: #1e1e1e;
   width: 100%;
+
+  @media (max-width: 540px) {
+    display: ${({ selected }) => (selected === null ? "block" : "none")};
+  }
 `;

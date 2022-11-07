@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import Appcontext from "../context/Appcontext";
 import Accordion from "./Accordion";
-function Content({ type, title, children }) {
+function Content({ type, title, children, path }) {
   const { setSelectedPost, setOpenPost, openPost } = useContext(Appcontext);
 
   function selectedFunction() {
     setSelectedPost(title);
+
+    if (!openPost.includes(path));
+
     setOpenPost([...openPost, title]);
   }
 
