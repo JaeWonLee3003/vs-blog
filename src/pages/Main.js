@@ -11,6 +11,7 @@ import {
 import Content from "../components/Content";
 import AppContext from "../context/Appcontext";
 import { getPostOne } from "../common/common.function";
+import PostWrap from "../components/PostWrap";
 
 function Main() {
   const [selected, setSelected] = useState(null);
@@ -23,13 +24,21 @@ function Main() {
       path: "EXPLORER",
       content: (
         <>
-          <Accordion title="OPEN POSTS" isBold={true}>
-            {openPost.map((one) => (
-              <div>{getPostOne(postData, one).title}</div>
-            ))}
+          <Accordion title="OPEN POSTS" isBold={true} initialexpansion={true}>
+            {openPost.map((one, index) => {
+              const data = getPostOne(postData, one);
+              return (
+                <PostWrap
+                  path={data.path}
+                  title={data.title}
+                  key={index}
+                  isClose={true}
+                ></PostWrap>
+              );
+            })}
           </Accordion>
 
-          <Accordion title="VSCODE" isBold={true}>
+          <Accordion title="VSCODE" isBold={true} initialexpansion={true}>
             {postData.map((one, index) => (
               <Content {...one} key={index} />
             ))}
@@ -81,20 +90,7 @@ function Main() {
 
         <RightHeader>
           {openPost.map((one, index) => {
-            const pathArr = one.split("/").filter(Boolean);
-
-            const data = pathArr.reduce((sum, current, index) => {
-              const lastPath = pathArr.length - 1 === index;
-
-              const target = sum.find((one) => {
-                return (
-                  one.title === current &&
-                  one.type === (lastPath ? "post" : "directory")
-                );
-              });
-
-              return lastPath ? target : target?.children;
-            }, postData);
+            const data = getPostOne(postData, one);
             return (
               <div
                 className={selectedPost === one ? "selected" : ""}
@@ -192,6 +188,14 @@ const RightHeader = styled.div`
   background-color: #1e1e1e;
   overflow-x: scroll;
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:hover::-webkit-scrollbar {
+    display: block;
+  }
+
   > div {
     width: 150px;
     min-width: 150px;
@@ -202,6 +206,14 @@ const RightHeader = styled.div`
 
     &.selected {
       background-color: #1e1e1e;
+    }
+
+    &:not(.selected) > span {
+      display: none;
+    }
+
+    &:hover > span {
+      display: block;
     }
 
     > span {

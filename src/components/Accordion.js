@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { VscChevronRight, VscChevronDown } from "react-icons/vsc";
 
-function Accordion({ title, children, isBold }) {
-  const [expended, setExpended] = useState(false);
+function Accordion({ title, children, isBold, initialexpansion }) {
+  const [expended, setExpended] = useState(initialexpansion || false);
 
   return (
     <>
@@ -13,7 +13,7 @@ function Accordion({ title, children, isBold }) {
         }}
       >
         {expended ? <VscChevronDown /> : <VscChevronRight />}
-        <span>{title ? <strong>{title}</strong> : title}</span>
+        <span>{isBold ? <strong>{title}</strong> : title}</span>
       </AccordionWrap>
       {
         <AccordionContentWrap expended={expended}>
