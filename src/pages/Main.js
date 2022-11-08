@@ -10,6 +10,7 @@ import {
 } from "react-icons/vsc";
 import Content from "../components/Content";
 import AppContext from "../context/Appcontext";
+import { getPostOne } from "../common/common.function";
 
 function Main() {
   const [selected, setSelected] = useState(null);
@@ -18,13 +19,16 @@ function Main() {
 
   const listArr = [
     {
-      icon: <VscFile size={22.4} />,
+      icon: <VscFile size={24} />,
       path: "EXPLORER",
       content: (
         <>
           <Accordion title="OPEN POSTS" isBold={true}>
-            내요요요옹
+            {openPost.map((one) => (
+              <div>{getPostOne(postData, one).title}</div>
+            ))}
           </Accordion>
+
           <Accordion title="VSCODE" isBold={true}>
             {postData.map((one, index) => (
               <Content {...one} key={index} />
