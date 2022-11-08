@@ -1,12 +1,19 @@
+import styled, { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: ${({ theme }) => theme.color.font};
 }
 
 *:not(svg, path) {
-  color: white;
+  color: ${({ theme }) => theme.color.font};
 }
+
 
 body {
   margin: 0;
@@ -31,5 +38,7 @@ code {
 }
 
 *::-webkit-scrollbar-track {
-  background: rgba(70, 70, 70, 0.1);
+    background-color: ${({ theme }) => theme.color.secondary};
 }
+
+`;

@@ -20,7 +20,17 @@ function PostWrap({ title, path, isClose }) {
       className={selectedPost === path ? "selected" : ""}
     >
       &nbsp;&nbsp;
-      <span className={isClose && selectedPost === path ? "visible" : ""}>
+      <span
+        className={isClose && selectedPost === path ? "visible" : ""}
+        onClick={(e) => {
+          e.stopPropagation();
+          const openPostFilter = openPost.filter((one) => one !== path);
+          setOpenPost(openPostFilter);
+          setSelectedPost(
+            openPostFilter.length !== 0 ? openPostFilter[0] : null
+          );
+        }}
+      >
         &#215;
       </span>
       &nbsp;&nbsp; 📝{title}
@@ -36,12 +46,15 @@ const PostWrapstyled = styled.div`
   position: relative;
 
   &:not(.selected):hover {
-    background-color: #3c3c3c;
+    background-color: ${({ theme }) => theme.color.third};
   }
   &.selected {
-    background-color: #505050;
+    background-color: ${({ theme }) => theme.color.third};
   }
 
+  &:hover > span {
+    display: block;
+  }
   > span {
     top: 3px;
     left: 5px;

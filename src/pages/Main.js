@@ -86,8 +86,6 @@ function Main() {
         </LeftContent>
       )}
       <RightWrap selected={selected}>
-        <div></div>
-
         <RightHeader>
           {openPost.map((one, index) => {
             const data = getPostOne(postData, one);
@@ -140,24 +138,24 @@ const IconWrap = styled.div`
 const Wrap = styled.div`
   display: flex;
   height: 100vh;
-  background-color: white;
+  background-color: ${({ theme }) => theme.color.third};
 `;
 const LeftBar = styled.div`
   width: 50px;
   height: 100%;
-  background-color: #333333;
+  background-color: ${({ theme }) => theme.color.LeftBar};
   min-width: 50px;
 `;
 const LeftContent = styled.div`
   width: 320px;
   min-width: 320px;
   height: 100%;
-  background-color: #252526;
+  background-color: ${({ theme }) => theme.color.secondary};
   padding: 10px;
 
   > p {
     padding-bottom: 15px 0 0 10px;
-    color: #7a7a7a;
+    color: ${({ theme }) => theme.color.font};
   }
 
   @media (max-width: 720px) {
@@ -165,7 +163,7 @@ const LeftContent = styled.div`
   }
 `;
 const RightContent = styled.div`
-  background-color: #1e1e1e;
+  background-color: ${({ theme }) => theme.color.third};
   width: 100%;
   height: calc(100% - 50px);
   @media (max-width: 540px) {
@@ -185,7 +183,7 @@ const RightHeader = styled.div`
   width: 100%;
   height: 50px;
   display: flex;
-  background-color: #1e1e1e;
+  background-color: ${({ theme }) => theme.color.secondary};
   overflow-x: scroll;
 
   ::-webkit-scrollbar {
@@ -200,12 +198,12 @@ const RightHeader = styled.div`
     width: 150px;
     min-width: 150px;
     padding: 10px;
-    background-color: #252526;
+    background-color: ${({ theme }) => theme.color.secondary};
     position: relative;
     cursor: pointer;
 
     &.selected {
-      background-color: #1e1e1e;
+      background-color: ${({ theme }) => theme.color.third};
     }
 
     &:not(.selected) > span {
