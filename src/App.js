@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Main from "./pages/Main";
 import AppContext from "./context/Appcontext";
-import { DarkTheme } from "./style/theme";
+import { DarkTheme, lightTheme } from "./style/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./style/GlobalStyle";
 
@@ -24,6 +24,7 @@ function App() {
   const [selectedPost, setSelectedPost] = useState("");
   const [postData, setPostData] = useState([]);
   const [openPost, setOpenPost] = useState([]);
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     setPostData([
@@ -71,12 +72,17 @@ function App() {
       value={{
         selectedPost,
         setSelectedPost,
+
         postData,
         setOpenPost,
+
         openPost,
+
+        theme,
+        setTheme,
       }}
     >
-      <ThemeProvider theme={DarkTheme}>
+      <ThemeProvider theme={theme === "dark" ? DarkTheme : lightTheme}>
         <GlobalStyle /> <RouterProvider router={router} />
       </ThemeProvider>
     </AppContext.Provider>
