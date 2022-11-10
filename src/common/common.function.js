@@ -1,6 +1,8 @@
 // 1개의 게시물 가져오기
 
 export const getPostOne = (postData, path) => {
+  if (!path) return false;
+
   const pathArr = path.split("/").filter(Boolean);
 
   const data = pathArr.reduce((sum, current, index) => {
