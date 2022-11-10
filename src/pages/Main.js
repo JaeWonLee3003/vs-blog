@@ -8,6 +8,8 @@ import Content from "../components/Content";
 import AppContext from "../context/Appcontext";
 import { getPostOne } from "../common/common.function";
 import PostWrap from "../components/PostWrap";
+import remarkGfm from "remark-gfm";
+import ReactMarkdown from "react-markdown";
 
 function Main() {
   const [selected, setSelected] = useState(null);
@@ -135,11 +137,16 @@ function Main() {
                       <strong>JaeWon</strong> | {data.data?.date}
                     </p>
                     <div>
-                      {data?.data?.tag.map((one, index) => (
+                      {data?.data?.tag?.map((one, index) => (
                         <span key={index}>{one}</span>
                       ))}
                     </div>
-                    <div>{data.data?.content}</div>
+                    <div>
+                      <ReactMarkdown
+                        children={data.data?.content}
+                        remarkPlugin={[remarkGfm]}
+                      />
+                    </div>
                   </div>
                 </>
               )

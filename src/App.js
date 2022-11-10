@@ -10,6 +10,7 @@ import AppContext from "./context/Appcontext";
 import { DarkTheme, lightTheme } from "./style/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./style/GlobalStyle";
+import axios from "axios";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -27,49 +28,14 @@ function App() {
   const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
-    setPostData([
-      {
-        type: "directory",
-        title: "일상",
-      },
-      {
-        type: "directory",
-        title: "Tech",
-        children: [
-          {
-            type: "post",
-            title: "Tech1",
-            path: "/Tech/Tech1",
-            data: {
-              data: "2022.11.09",
-              tag: ["기술", "리뷰"],
-              content: "내요오오오옹",
-            },
-          },
-          {
-            type: "post",
-            title: "Tech2",
-            path: "/Tech/Tech2",
-          },
-          {
-            type: "directory",
-            title: "Tech3",
-            children: [
-              {
-                type: "post",
-                title: "Tech31",
-                path: "/Tech/Tech3/Tech31",
-              },
-              {
-                type: "post",
-                title: "Tech32",
-                path: "/Tech/Tech3/Tech32",
-              },
-            ],
-          },
-        ],
-      },
-    ]);
+    async function fetch() {
+      const { data: responesPostData } = await axios.get(
+        "http://localhost:4001/post/all"
+      );
+      setPostData(responesPostData);
+      console.log(responesPostData);
+    }
+    fetch();
   }, []);
 
   return (
