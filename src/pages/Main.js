@@ -131,7 +131,27 @@ function Main() {
             );
           })}
         </RightHeader>
-        <RightContent>{selectedPost}</RightContent>
+        <RightContent selected={selectedPost}>
+          {(() => {
+            const data = getPostOne(postData, selectedPost);
+
+            return (
+              <>
+                <p>{data?.path}</p>
+                <div>
+                  <h1>{data?.title}</h1>
+                  <p>JaeWon_3 | {data?.data?.data}</p>
+                  <p>
+                    {data?.data?.tag.map((one, index) => {
+                      <span key={index}>{one}</span>;
+                    })}
+                  </p>
+                  <div>{data?.data?.content}</div>
+                </div>
+              </>
+            );
+          })()}
+        </RightContent>
       </RightWrap>
     </Wrap>
   );
@@ -212,8 +232,19 @@ const RightContent = styled.div`
   background-color: ${({ theme }) => theme.color.third};
   width: 100%;
   height: calc(100% - 50px);
-  @media (max-width: 540px) {
-    display: ${({ selected }) => (selected === null ? "block" : "none")};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+
+  > p {
+    color: #7a7a7a;
+    width: 100%;
+  }
+
+  > div {
+    width: 100%;
+    max-width: 600px;
   }
 `;
 

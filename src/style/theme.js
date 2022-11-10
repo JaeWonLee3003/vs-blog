@@ -11,8 +11,8 @@ export const DarkTheme = {
 
 export const lightTheme = {
   color: {
-    primary: "aqua",
-    secondary: "orange",
+    primary: "#3E848C",
+    secondary: "#025159",
     third: "#7AB8BF",
     fourth: "#C4EEF2",
     font: "white",
