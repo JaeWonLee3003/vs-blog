@@ -12,6 +12,7 @@ import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Search from "./Search";
 
 function Main() {
   const [selected, setSelected] = useState(null);
@@ -55,7 +56,7 @@ function Main() {
     {
       icon: <AiOutlineSearch size={24} />,
       path: "SEARCH",
-      content: <p>111</p>,
+      content: <Search />,
     },
   ];
 
