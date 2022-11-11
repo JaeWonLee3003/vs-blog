@@ -10,6 +10,8 @@ import { getPostOne } from "../common/common.function";
 import PostWrap from "../components/PostWrap";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 function Main() {
   const [selected, setSelected] = useState(null);
@@ -145,6 +147,32 @@ function Main() {
                       <ReactMarkdown
                         children={data.data?.content}
                         remarkPlugin={[remarkGfm]}
+                        components={{
+                          code({
+                            node,
+                            inline,
+                            className,
+                            children,
+                            ...props
+                          }) {
+                            const match = /language-(\w+)/.exec(
+                              className || ""
+                            );
+                            return !inline && match ? (
+                              <SyntaxHighlighter
+                                children={String(children).replace(/\n$/, "")}
+                                style={dark}
+                                language={match[1]}
+                                PreTag="div"
+                                {...props}
+                              />
+                            ) : (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            );
+                          },
+                        }}
                       />
                     </div>
                   </div>
@@ -289,6 +317,7 @@ const RightContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: scroll;
 
   padding: 10px 20px;
   > p {
