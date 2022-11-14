@@ -4,7 +4,7 @@ import Accordion from "../components/Accordion";
 import Appcontext from "../context/Appcontext";
 
 function Search() {
-  const { postData } = useContext(Appcontext);
+  const { postData, setSelectedTag } = useContext(Appcontext);
   const [tagData, setTagdata] = useState([
     {
       tagTitle: "Tech",
@@ -61,7 +61,12 @@ function Search() {
     <Accordion title="Tags" initialexpansion isBold>
       <TagWrap>
         {tagData.map((one, index) => (
-          <Tag key={index}>
+          <Tag
+            key={index}
+            onClick={() => {
+              setSelectedTag(one.tagTitle);
+            }}
+          >
             {one.tagTitle}
             <span>{one.count}</span>
           </Tag>
