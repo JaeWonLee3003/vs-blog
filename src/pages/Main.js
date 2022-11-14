@@ -13,6 +13,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import Search from "./Search";
+import { json } from "react-router-dom";
 
 function Main() {
   const [selected, setSelected] = useState(null);
@@ -93,7 +94,19 @@ function Main() {
       )}
       <RightWrap selected={selected}>
         {selectedTag ? (
-          <>1111{selected}</>
+          <RightTagContent>
+            <h2>
+              {selectedTag.tagtitle} 관련 글 목록{" "}
+              <span>({selectedTag.path.length} 개)</span>
+            </h2>
+            <div>
+              {selectedTag.path.map((path) => {
+                const tagData = getPostOne(postData, path);
+
+                return <div>{tagData.title}</div>;
+              })}
+            </div>
+          </RightTagContent>
         ) : (
           <>
             <RightHeader visible={openPost.length !== 0 ? true : false}>
@@ -348,4 +361,15 @@ const RightContent = styled.div`
       }
     }
   }
+`;
+
+const RightTagContent = styled.div`
+  background-color: ${({ theme }) => theme.color.primary};
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  padding: 10px 20px;
 `;

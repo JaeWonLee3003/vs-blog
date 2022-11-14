@@ -17,6 +17,6 @@ export default React.createContext({
   setTheme: () => {},
 
   // 현재 선택된 태그
-  selectedTag: "",
+  selectedTag: null,
   setSelectedTag: () => {},
 });

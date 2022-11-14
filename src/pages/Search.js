@@ -41,11 +41,13 @@ function Search() {
 
             if (tempTarget) {
               tempTarget.count += 1;
+              tempTarget.postArr.push(nowPostData.path);
+              tempTarget.postArr = [...new Set(tempTarget.postArr)];
             } else {
               tempArr.push({
                 tagTitle: tag,
                 count: 1,
-                postArr: [],
+                postArr: [nowPostData.path],
               });
             }
           });
@@ -55,8 +57,9 @@ function Search() {
         }
       });
     }
+    console.log(tempArr);
     setTagdata(tempArr);
-  }, []);
+  }, [postData]);
   return (
     <Accordion title="Tags" initialexpansion isBold>
       <TagWrap>
@@ -64,7 +67,10 @@ function Search() {
           <Tag
             key={index}
             onClick={() => {
-              setSelectedTag(one.tagTitle);
+              setSelectedTag({
+                tagTitle: one.tagTitle,
+                path: one.postArr,
+              });
             }}
           >
             {one.tagTitle}
